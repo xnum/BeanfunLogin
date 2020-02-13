@@ -229,3 +229,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/.vs/BeanfunLogin/v16/Server/sqlite3/db.lock
+/.vs/BeanfunLogin/v16/Server/sqlite3/storage.ide
+/.vs/BeanfunLogin/v16/Server/sqlite3/storage.ide-shm
+/.vs/BeanfunLogin/v16/Server/sqlite3/storage.ide-wal
