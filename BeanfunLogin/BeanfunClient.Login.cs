@@ -11,6 +11,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace BeanfunLogin
 {
@@ -265,11 +266,14 @@ namespace BeanfunLogin
                 value = regex.Match(response).Groups[1].Value;
 
                 response = this.DownloadString($"https://tw.newlogin.beanfun.com/generic_handlers/get_qrcodeData.ashx?skey={skey}");
-                regex = new Regex("\"strEncryptData\": \"(.*)\"}");
-                if (!regex.IsMatch(response))
-                { this.errmsg = "LoginIntResultError"; return null; }
+                //regex = new Regex("\"strEncryptData\": \"(.*)\"}");
+                //if (!regex.IsMatch(response))
+                //{ this.errmsg = "LoginIntResultError"; return null; }
 
-                strEncryptData = regex.Match(response).Groups[1].Value;
+                //strEncryptData = regex.Match(response).Groups[1].Value;
+                var definitions = new { intResult = "", strResult = "", strEncryptData = "", strEncryptBCDOData = "" };
+                var json = JsonConvert.DeserializeAnonymousType(response, definitions);
+                strEncryptData = json.strEncryptData;
 
                 stream = this.OpenRead($"https://tw.newlogin.beanfun.com/{value}{strEncryptData}");
             }
